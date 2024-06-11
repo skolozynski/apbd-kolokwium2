@@ -17,6 +17,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 builder.Services.AddScoped<DataContext, DataContext>();
 builder.Services.AddScoped<IItemRepository, ItemRepository>();
 builder.Services.AddScoped<ICharacterRepository, CharacterRepository>();
+builder.Services.AddScoped<ITitlesRepository, TitlesRepository>();
 
 
 var app = builder.Build();

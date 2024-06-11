@@ -53,4 +53,19 @@ public class ItemRepository : IItemRepository
         }
         await _context.SaveChangesAsync();
     }
+
+    public async Task<List<BackpackItemDto>> GetBackapckItemsList(int characterId)
+    {
+        var itemsInBackpack = await _context.Backpacks
+            .Where(e => e.CharacterId == characterId)
+            .Include(e => e.Item)
+            .Select(e => new BackpackItemDto()
+            {
+                ItemName = e.Item.Name,
+                ItemWeight = e.Item.Weight,
+                Amount = e.Amount
+            })
+            .ToListAsync();
+        return itemsInBackpack;
+    }
 }
